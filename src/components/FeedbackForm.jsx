@@ -5,17 +5,17 @@ import FeedbackContext from '../context/FeedbackContext'
 import { useState, useContext, useEffect } from 'react'
 
 function FeedbackForm() {
-
   const [text, setText] = useState('')
   const [message, setMessage] = useState('')
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [rating, setRating] = useState(10)
-  
-  const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext)
+
+  const { addFeedback, feedbackEdit, updateFeedback } =
+    useContext(FeedbackContext)
   // here whenever feedbackEdit changes we want something to happen so we can use a watcher i.e. useAffect hook in react
 
   useEffect(() => {
-    if(feedbackEdit.edit === true){
+    if (feedbackEdit.edit === true) {
       setText(feedbackEdit.item.text)
       setMessage(feedbackEdit.item.message)
       setRating(feedbackEdit.item.rating)
@@ -30,7 +30,7 @@ function FeedbackForm() {
         text,
         rating,
       }
-      if(feedbackEdit.edit === true){
+      if (feedbackEdit.edit === true) {
         updateFeedback(feedbackEdit.item.id, newFeedback)
       } else {
         addFeedback(newFeedback)

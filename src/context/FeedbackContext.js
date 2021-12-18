@@ -59,8 +59,12 @@ export const FeedbackProvider = ({ children }) => {
     })
   }
 
-  const updateFeedback = (id, updatedItem)=>{
-    setFeedback(feedback.map((item) => item.id === id ? { ...item, ...updatedItem} : item))
+  const updateFeedback = (id, updatedItem) => {
+    setFeedback(
+      feedback.map((item) =>
+        item.id === id ? { ...item, ...updatedItem } : item
+      )
+    )
   }
   // any state or functions which we want to use will be passed inside value
   // editFeedback -> function
@@ -73,7 +77,7 @@ export const FeedbackProvider = ({ children }) => {
         deleteFeedback,
         addFeedback,
         editFeedback,
-        updateFeedback
+        updateFeedback,
       }}
     >
       {/* this will contain all the components that will require access to our context */}
