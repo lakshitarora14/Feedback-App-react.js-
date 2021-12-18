@@ -1,4 +1,4 @@
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaEdit } from 'react-icons/fa'
 import FeedbackContext from '../context/FeedbackContext'
 import { useContext } from 'react'
 //to use state hooks we need to import this, hooks start with use
@@ -12,7 +12,7 @@ function FeedbackItem({ item }) {
   //   const [rating, setRating] = useState(7)
 
   // accessing delete function from context api
-  const { deleteFeedback } = useContext(FeedbackContext)
+  const { deleteFeedback, editFeedback } = useContext(FeedbackContext)
 
   return (
     //   reverse is the prop we set for reverse styling through which we will do conditional styling, we are taking default value for now
@@ -23,6 +23,9 @@ function FeedbackItem({ item }) {
       for example in this case we use in above function, we catch the id there */}
       <button onClick={() => deleteFeedback(item.id)} className='close'>
         <FaTimes color='purple' />
+      </button>
+      <button onClick={() => editFeedback(item)} className='edit'>
+        <FaEdit color='purple' />
       </button>
       <div className='text-display'>{item.text}</div>
     </Card>

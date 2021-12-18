@@ -2,7 +2,7 @@ import Card from './shared/Card'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
 import FeedbackContext from '../context/FeedbackContext'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 
 function FeedbackForm() {
 
@@ -11,7 +11,17 @@ function FeedbackForm() {
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [rating, setRating] = useState(10)
   
-  const { addFeedback } = useContext(FeedbackContext)
+  const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext)
+  // here whenever feedbackEdit changes we want something to happen so we can use a watcher i.e. useAffect hook in react
+
+  useEffect(() => {
+    if(feedbackEdit.edit === true){
+      setText(feedbackEdit.item.text)
+      setMessage(feedbackEdit.item.message)
+      setRating(feedbackEdit.item.rating)
+      setBtnDisabled(false)
+    }
+  }, [feedbackEdit])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -20,7 +30,11 @@ function FeedbackForm() {
         text,
         rating,
       }
-      addFeedback(newFeedback)
+      if(feedbackEdit.edit === true){
+        updateFeedback(feedbackEdit.item.id, newFeedback)
+      } else {
+        addFeedback(newFeedback)
+      }
       setText('')
     }
   }
