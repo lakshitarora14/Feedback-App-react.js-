@@ -4,14 +4,19 @@ import { motion, AnimatePresence } from 'framer-motion'
 // to use context we need to import these two things i.e. useContext hook and the context we created
 import { useContext } from 'react'
 import FeedbackContext from '../context/FeedbackContext'
+import Spinner from './shared/Spinner'
 
 function FeedbackList() {
   // we can extract whatever we want from our context by using our useContext hook and passing out context
   // here we have access to anything which is there in the value of Context
-  const { feedback } = useContext(FeedbackContext)
-  if (!feedback || feedback.length === 0) return <p1>No feedback yet</p1>
+  const { feedback, isLoading } = useContext(FeedbackContext)
 
-  return (
+  if (!isLoading && (!feedback || feedback.length === 0))
+    return <p1>No feedback yet</p1>
+
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className='feedback-list'>
       <AnimatePresence>
         {feedback.map((item) => (
