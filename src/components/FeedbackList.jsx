@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useContext } from 'react'
 import FeedbackContext from '../context/FeedbackContext'
 
-function FeedbackList({ handleDelete }) {
+function FeedbackList() {
   // we can extract whatever we want from our context by using our useContext hook and passing out context
   // here we have access to anything which is there in the value of Context
   const { feedback } = useContext(FeedbackContext)
@@ -21,11 +21,7 @@ function FeedbackList({ handleDelete }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <FeedbackItem
-              key={item.id}
-              item={item}
-              handleDelete={handleDelete}
-            />
+            <FeedbackItem key={item.id} item={item} />
           </motion.div>
         ))}
       </AnimatePresence>
@@ -40,7 +36,7 @@ function FeedbackList({ handleDelete }) {
   //     </div>
   //   )
 }
-// we do not need this now since we are using context 
+// we do not need this now since we are using context
 // FeedbackList.propTypes = {
 //   // feedback: PropTypes.array.isRequired,
 //   // we can also set shape i.e. what should be included in the object in the array
