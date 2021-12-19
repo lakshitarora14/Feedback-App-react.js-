@@ -57,8 +57,7 @@ export const FeedbackProvider = ({ children }) => {
   }
 
   const updateFeedback = async (id, updatedItem) => {
-    const response = await fetch(`/feedback/${id}`,
-    {
+    const response = await fetch(`/feedback/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +69,7 @@ export const FeedbackProvider = ({ children }) => {
       feedback.map((item) => (item.id === id ? { ...item, ...data } : item))
     )
   }
-  
+
   // any state or functions which we want to use will be passed inside value
   // editFeedback -> function
   // feedbackEdit -> object
